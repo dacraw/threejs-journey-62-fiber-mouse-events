@@ -26,7 +26,7 @@ export default function Experience() {
         <meshStandardMaterial color="orange" />
       </mesh>
 
-      <mesh ref={cube} position-x={2} scale={1.5} onClick={eventHandler}>
+      <mesh ref={cube} position-x={2} scale={1.5} onContextMenu={eventHandler}>
         <boxGeometry />
         <meshStandardMaterial color="mediumpurple" />
       </mesh>
