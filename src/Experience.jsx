@@ -1,5 +1,5 @@
 import { useFrame } from "@react-three/fiber";
-import { OrbitControls, useGLTF, meshBounds } from "@react-three/drei";
+import { OrbitControls, useGLTF, meshBounds, Bvh } from "@react-three/drei";
 import { useRef } from "react";
 
 export default function Experience() {
@@ -10,13 +10,15 @@ export default function Experience() {
     cube.current.rotation.y += delta * 0.2;
   });
 
+  // useBVH drei helper is better than meshBounds for complex geometries; improves performance and click accuracy
+
   const eventHandler = ({ eventObject }) => {
     // eventObject.color = new THREE.Color("red");
     cube.current.material.color.set(`hsl(${Math.random() * 360}, 100%, 75%)`);
   };
 
   return (
-    <>
+    <Bvh>
       <OrbitControls makeDefault />
 
       <directionalLight position={[1, 2, 3]} intensity={4.5} />
@@ -38,7 +40,7 @@ export default function Experience() {
         onPointerLeave={() => {
           document.body.style.cursor = "default";
         }}
-        raycast={meshBounds}
+        // raycast={meshBounds}
       >
         <boxGeometry />
         <meshStandardMaterial color="mediumpurple" />
@@ -59,6 +61,6 @@ export default function Experience() {
           e.stopPropagation();
         }}
       />
-    </>
+    </Bvh>
   );
 }
