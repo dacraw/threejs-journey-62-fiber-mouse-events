@@ -1,5 +1,5 @@
 import { useFrame } from "@react-three/fiber";
-import { OrbitControls, useGLTF } from "@react-three/drei";
+import { OrbitControls, useGLTF, meshBounds } from "@react-three/drei";
 import { useRef } from "react";
 
 export default function Experience() {
@@ -38,6 +38,7 @@ export default function Experience() {
         onPointerLeave={() => {
           document.body.style.cursor = "default";
         }}
+        raycast={meshBounds}
       >
         <boxGeometry />
         <meshStandardMaterial color="mediumpurple" />
